@@ -1,20 +1,9 @@
-import express,{Request,Response} from "express";
+import express from "express";
 import cors from 'cors';
-import { db } from "./db/db";
+import { auth } from "./router/auth";
 const app=express();
 const PORT=8080;
 app.use(express.json());
 app.use(cors())
-app.get('/',(req:Request,res:Response)=>{
-    db.serialize(()=>{
-        db.each("SELECT * FROM userinfo",(err,row)=>{
-            if(err){
-                return res.json({result:err})
-            }
-            return res.json({
-                result:row,
-            })
-        })
-    })
-})
+app.use('/auth',auth);
 app.listen(PORT);
