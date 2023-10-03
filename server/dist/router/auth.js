@@ -18,6 +18,7 @@ const uuid_1 = require("uuid");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const db_1 = require("../db/db");
 exports.auth = (0, express_1.Router)();
+//新規作成
 exports.auth.post('/signup', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, email, password } = req.body; //ユーザー情報を取得する
     const uuid = (0, uuid_1.v4)(); //id作成
@@ -33,7 +34,7 @@ exports.auth.post('/signup', (req, res) => __awaiter(void 0, void 0, void 0, fun
                 }
                 else {
                     db_1.db.run(`INSERT INTO userinfo(name,email,password,id) VALUES($1 , $2 , $3 , $4)`, [name, email, hashedpassword, id]);
-                    db_1.db.run(`CREATE TABLE ${id}(todo VARCHAR(255),checked VARCHAR(255))`);
+                    db_1.db.run(`CREATE TABLE ${id}(id VARCHAR(255),todo VARCHAR(255),checked VARCHAR(255))`);
                     db_1.db.all(`SELECT * FROM userinfo WHERE email=$1`, [email], (err, rows) => {
                         return res.status(200).json({
                             data: rows,
@@ -48,4 +49,35 @@ exports.auth.post('/signup', (req, res) => __awaiter(void 0, void 0, void 0, fun
             data: "error"
         });
     }
+}));
+//ログイン
+exports.auth.post('/login', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { email, password } = req.body;
+    db_1.db.serialize(() => {
+        db_1.db.all('SELECT * FROM userinfo', (err, rows) => __awaiter(void 0, void 0, void 0, function* () {
+            if (err) {
+                return res.json({
+                    data: "error1"
+                });
+            }
+            else if (rows.length == 0) {
+                return res.json({
+                    data: "ユーザ登録されていません。"
+                });
+            }
+            else {
+                const isMatch = yield bcrypt_1.default.compare(password, rows[0].password);
+                if (!isMatch) {
+                    return res.json({
+                        data: "パスワードが間違っています"
+                    });
+                }
+                else {
+                    return res.json({
+                        data: rows[0]
+                    });
+                }
+            }
+        }));
+    });
 }));
