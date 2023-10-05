@@ -5,10 +5,10 @@ const express_1 = require("express");
 const db_1 = require("../db/db");
 exports.todo = (0, express_1.Router)();
 //データを取得
-exports.todo.get('/getList/:id', (req, res) => {
-    const { id } = req.params;
+exports.todo.get('/getList/:table', (req, res) => {
+    const { table } = req.params;
     db_1.db.serialize(() => {
-        db_1.db.all(`SELECT * FROM ${id}`, (err, rows) => {
+        db_1.db.all(`SELECT * FROM ${table}`, (err, rows) => {
             if (err) {
                 return res.json({
                     data: "error",

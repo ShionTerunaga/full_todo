@@ -4,10 +4,10 @@ import { todoData } from "../shared/type";
 
 export const todo=Router();
 //データを取得
-todo.get('/getList/:id',(req:Request,res:Response)=>{
-    const {id}=req.params;
+todo.get('/getList/:table',(req:Request,res:Response)=>{
+    const {table}=req.params;
     db.serialize(()=>{
-        db.all(`SELECT * FROM ${id}`,(err:Error|null,rows:todoData[])=>{
+        db.all(`SELECT * FROM ${table}`,(err:Error|null,rows:todoData[])=>{
             if(err){
                 return res.json({
                     data:"error",
