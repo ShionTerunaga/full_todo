@@ -1,5 +1,5 @@
 import ja from "@/shared/ja";
-import RoutingButton from "./home/routingButton";
+import RoutingButton from "./components/routingButton";
 import Title from "./components/title";
 import linkName from "@/shared/linkName";
 import styles from "./style.css";
