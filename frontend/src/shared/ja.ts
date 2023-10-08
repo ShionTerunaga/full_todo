@@ -28,6 +28,28 @@ export default {
             }
         },
         buttonTitle:"新規登録する",
+        gobackBotton:"ホームに戻る",
+        alradyHaveAccount:"データはもうすでにあります",/*追加*/
+    },
+    login:{
+        title:"ログイン",
+        instruction:"メールアドレスとパスワードを入れてください。",
+        validationCheck:{
+            required:"この項目は必須です",
+            email:"メールアドレスの形式が違います",
+            password:"パスワードが短いです"
+        },
+        attribute:{
+            email:{
+                labelName:"email",
+                typeName:"email",
+            },
+            password:{
+                labelName:"password",
+                typeName:"password",
+            }
+        },
+        buttonTitle:"ログイン！！！",
         gobackBotton:"ホームに戻る"
     }
 }

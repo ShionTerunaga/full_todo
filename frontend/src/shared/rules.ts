@@ -12,3 +12,14 @@ export const signupValidation = yup.object({
         .required(ja.signup.validationCheck.required)
         .min(8, ja.signup.validationCheck.password)
 });
+// ログインのバリデーションチェック
+export const loginValidation = yup.object({
+    email: yup
+        .string()
+        .required(ja.signup.validationCheck.required)
+        .email(ja.signup.validationCheck.email),
+    password: yup
+        .string()
+        .required(ja.signup.validationCheck.required)
+        .min(8, ja.signup.validationCheck.password)
+});

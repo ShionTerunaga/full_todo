@@ -2,15 +2,18 @@
 import InputForm from "@/app/components/inputForm";
 import ja from "@/shared/ja";
 import { signupValidation } from "@/shared/rules";
-import { signupType } from "@/shared/type";
+import { resSignupData, signupType } from "@/shared/type";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import styles from "./style.css";
 import SubmitButton from "@/app/components/submitButton";
 import RoutingButton from "@/app/components/routingButton";
 import linkName from "@/shared/linkName";
+import { signup } from "@/api/auth";
+import { useRouter } from "next/navigation";
 
 const SignupForm = () => {
+    const router=useRouter();
     const { register, 
             handleSubmit,
             formState:{errors}
@@ -18,9 +21,13 @@ const SignupForm = () => {
         resolver: yupResolver(signupValidation),
     });
     const onSubmit=async(data:signupType)=>{
-        console.log(data);
+        const res:resSignupData[]=await signup(data);
+        if(res.length===0){
+            alert(ja.signup.alradyHaveAccount)
+        }else{
+            router.push(`/todo?id=${res[0].id}&name=${res[0].name}`)
+        }
     };
-    handleSubmit(onSubmit);
     return (
         <div>
             <div className={styles.inputText}>
