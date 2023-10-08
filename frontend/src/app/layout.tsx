@@ -1,7 +1,4 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Todo',
@@ -15,7 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <body className={inter.className} style={{margin:0}}>{children}</body>
+      <body style={{margin:0}}>{children}</body>
     </html>
   )
 }

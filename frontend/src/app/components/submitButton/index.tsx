@@ -1,4 +1,3 @@
-import { signupType } from "@/shared/type";
 import { Button } from "@mui/material";
 import { BaseSyntheticEvent } from "react";
 

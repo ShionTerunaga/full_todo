@@ -1,11 +1,10 @@
 'use client'
-
 import InputForm from "@/app/components/inputForm";
 import ja from "@/shared/ja";
 import { signupValidation } from "@/shared/rules";
 import { signupType } from "@/shared/type";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { UseFormRegisterReturn, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import styles from "./style.css";
 import SubmitButton from "@/app/components/submitButton";
 import RoutingButton from "@/app/components/routingButton";
