@@ -29,7 +29,7 @@ export default {
         },
         buttonTitle:"新規登録する",
         gobackBotton:"ホームに戻る",
-        alradyHaveAccount:"データはもうすでにあります",/*追加*/
+        alradyHaveAccount:"データはもうすでにあります",
     },
     login:{
         title:"ログイン",
@@ -50,6 +50,24 @@ export default {
             }
         },
         buttonTitle:"ログイン！！！",
-        gobackBotton:"ホームに戻る"
+        gobackBotton:"ホームに戻る",
+        notingAcount:"ユーザ登録されていません",
+        differentPassword:"パスワードが違います。",
+        alertMessage:"ユーザ登録がされていない、もしくはパスワードが違います。もう一度確認して見てください。"
+    },
+    todo:{
+        title:"TODO APP",
+        description:"自分だけのTODOを作成しよう！",
+        greeting:" Hello!!!!!",
+        notLogin:"ログインしてから来いやー",
+        buttonTitle:"登録",
+        attribute:{
+            todo:{
+                labelName:"todo",
+            },
+        },
+        logingMsg:"Loding...",
+        complete:"完了タスク",
+        imcomplete:"未完了タスク",
     }
 }

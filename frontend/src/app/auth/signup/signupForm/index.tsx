@@ -2,7 +2,7 @@
 import InputForm from "@/app/components/inputForm";
 import ja from "@/shared/ja";
 import { signupValidation } from "@/shared/rules";
-import { resSignupData, signupType } from "@/shared/type";
+import { resAuthData, signupType } from "@/shared/type";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import styles from "./style.css";
@@ -11,6 +11,7 @@ import RoutingButton from "@/app/components/routingButton";
 import linkName from "@/shared/linkName";
 import { signup } from "@/api/auth";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const SignupForm = () => {
     const router=useRouter();
@@ -21,7 +22,7 @@ const SignupForm = () => {
         resolver: yupResolver(signupValidation),
     });
     const onSubmit=async(data:signupType)=>{
-        const res:resSignupData[]=await signup(data);
+        const res:resAuthData[]=await signup(data);
         if(res.length===0){
             alert(ja.signup.alradyHaveAccount)
         }else{
@@ -36,7 +37,7 @@ const SignupForm = () => {
                     register={register('name')}
                     error={'name' in errors}
                     helperText={errors.name?.message} 
-                    typeName={undefined}                
+                    typeName={undefined}             
                 />
             </div>
             <div className={styles.inputText}>
@@ -54,7 +55,7 @@ const SignupForm = () => {
                     register={register('password')}
                     error={'password' in errors}
                     helperText={errors.password?.message} 
-                    typeName={ja.signup.attribute.password.typeName}                
+                    typeName={ja.signup.attribute.password.typeName}               
                 />
             </div>
             <div className={styles.inputButton}>

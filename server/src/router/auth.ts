@@ -39,24 +39,26 @@ auth.post('/signup',async(req:Request,res:Response)=>{
 auth.post('/login',async(req:Request,res:Response)=>{
     const {email,password}=req.body;
     db.serialize(()=>{
-        db.all('SELECT * FROM userinfo',async(err:Error|null,rows:authData[])=>{
+        db.all('SELECT * FROM userinfo WHERE email=$1',[email],async(err:Error|null,rows:authData[])=>{
             if(err){
                 return res.json({
-                    data:"error"
+                    data:"error1"
                 })
-            }else if(rows.length==0){
+            }else if(rows.length===0){
                 return res.json({
-                    data:"error"
+                    data:"ユーザ登録されていません。"
                 })
             }else{
-                const isMatch=await bcrypt.compare(password,rows[0].password)
+                const isMatch=bcrypt.compare(password,rows[0].password)
+                
                 if(!isMatch){
                     return res.json({
-                        data:"error"
+                        data:"パスワードが違います。"
+                        
                     })
                 }else{
                     return res.json({
-                        data:rows[0]
+                        data:rows
                     })
                 }
             }

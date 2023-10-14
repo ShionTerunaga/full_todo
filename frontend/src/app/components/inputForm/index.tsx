@@ -1,5 +1,5 @@
-import { signupType } from "@/shared/type";
 import { TextField } from "@mui/material";
+import { Dispatch, SetStateAction, useState } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 interface props{
     labelName:string;
@@ -8,7 +8,13 @@ interface props{
     typeName:string|undefined;
     helperText:string|undefined;
 }
-const InputForm = ({labelName,register,error,typeName,helperText}:props) => {
+const InputForm = ({
+    labelName,
+    register,
+    error,
+    typeName,
+    helperText,
+}:props) => {
     return (
         <TextField
             required

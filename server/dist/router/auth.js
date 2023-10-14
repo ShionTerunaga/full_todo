@@ -54,27 +54,27 @@ exports.auth.post('/signup', (req, res) => __awaiter(void 0, void 0, void 0, fun
 exports.auth.post('/login', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
     db_1.db.serialize(() => {
-        db_1.db.all('SELECT * FROM userinfo', (err, rows) => __awaiter(void 0, void 0, void 0, function* () {
+        db_1.db.all('SELECT * FROM userinfo WHERE email=$1', [email], (err, rows) => __awaiter(void 0, void 0, void 0, function* () {
             if (err) {
                 return res.json({
-                    data: "error"
+                    data: "error1"
                 });
             }
-            else if (rows.length == 0) {
+            else if (rows.length === 0) {
                 return res.json({
-                    data: "error"
+                    data: "ユーザ登録されていません。"
                 });
             }
             else {
-                const isMatch = yield bcrypt_1.default.compare(password, rows[0].password);
+                const isMatch = bcrypt_1.default.compare(password, rows[0].password);
                 if (!isMatch) {
                     return res.json({
-                        data: "error"
+                        data: "パスワードが違います。"
                     });
                 }
                 else {
                     return res.json({
-                        data: rows[0]
+                        data: rows
                     });
                 }
             }

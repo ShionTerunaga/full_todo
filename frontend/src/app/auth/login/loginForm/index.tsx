@@ -1,6 +1,6 @@
 'use client'
 import { loginValidation } from "@/shared/rules";
-import { loginType } from "@/shared/type";
+import { loginType, resAuthData } from "@/shared/type";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import styles from "./style.css";
@@ -9,8 +9,11 @@ import ja from "@/shared/ja";
 import SubmitButton from "@/app/components/submitButton";
 import RoutingButton from "@/app/components/routingButton";
 import linkName from "@/shared/linkName";
+import { useRouter } from "next/navigation";
+import { login } from "@/api/auth";
 
 const LoginForm = () => {
+    const router=useRouter();
     const { register, 
         handleSubmit,
         formState:{errors}
@@ -18,7 +21,12 @@ const LoginForm = () => {
         resolver: yupResolver(loginValidation),
     });
     const onSubmit=async(data:loginType)=>{
-        console.log(data);
+        const res:resAuthData[]=await login(data);
+        if(res.length===0){
+            alert(ja.login.alertMessage);
+        }else{
+            router.push(`/todo?id=${res[0].id}&name=${res[0].name}`);
+        }
     };
     return (
         <div>
@@ -28,7 +36,7 @@ const LoginForm = () => {
                     register={register('email')}
                     error={'email' in errors}
                     helperText={errors.email?.message} 
-                    typeName={ja.login.attribute.email.typeName}                
+                    typeName={ja.login.attribute.email.typeName}           
                 />
             </div>
             <div className={styles.inputText}>
@@ -37,7 +45,7 @@ const LoginForm = () => {
                     register={register('password')}
                     error={'password' in errors}
                     helperText={errors.password?.message} 
-                    typeName={ja.login.attribute.password.typeName}                
+                    typeName={ja.login.attribute.password.typeName}              
                 />
             </div>
             <div className={styles.inputButton}>
