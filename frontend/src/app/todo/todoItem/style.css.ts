@@ -14,7 +14,6 @@ const styles={
     }),
     editButtons:style({
         display:"flex",
-        width:"50%",
     })
 }
 

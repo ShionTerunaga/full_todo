@@ -6,8 +6,10 @@ import styles from "./style.css";
 import NotLogin from "./notLogin";
 import TodoInputForm from "./todoInputForm";
 import TodoList from "./todoList";
-import { useState } from "react";
-import { todoType } from "@/shared/type";
+import { SetStateAction, useState } from "react";
+import { todoToggleType, todoType } from "@/shared/type";
+import { isCmptoggleItems } from "@/shared/data";
+import IsCompleteToggle from "./isCompleteToggle";
 const Todo = () => {
     const searchParams:ReadonlyURLSearchParams=useSearchParams();
     const name:string|null=searchParams.get('name');
@@ -15,6 +17,7 @@ const Todo = () => {
     const [todo,setTodo]=useState<todoType[]>([]);
     const [imcompleteData,setImcompleteData]=useState<todoType[]>([]);
     const [completeData,setCompleteData]=useState<todoType[]>([]);
+    const [toggleItem,setToggleItem]=useState<string>(isCmptoggleItems[0].value);
     return (
         <main className={styles.containar}>
             {id&&name?(
@@ -26,6 +29,12 @@ const Todo = () => {
                     <TodoInputForm
                         id={id}
                         setTodos={setTodo}
+                        setCompleteData={setCompleteData}
+                        setImcompleteData={setImcompleteData}
+                    />
+                    <IsCompleteToggle 
+                        toggle={toggleItem} 
+                        setToggle={setToggleItem}
                     />
                     <TodoList
                         id={id}
@@ -35,6 +44,7 @@ const Todo = () => {
                         imcompleteData={imcompleteData}
                         setCompleteData={setCompleteData}
                         setImcompleteData={setImcompleteData}
+                        toggle={toggleItem}
                     />
                 </>
             ):(

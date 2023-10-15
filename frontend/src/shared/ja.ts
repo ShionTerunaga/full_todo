@@ -69,5 +69,7 @@ export default {
         logingMsg:"Loding...",
         complete:"完了タスク",
         imcomplete:"未完了タスク",
+        notItem:"アイテムはありません",
+        numOfPieces:"個"
     }
 }

@@ -28,3 +28,9 @@ export type todoType={
     todo:string;
     checked:number;
 }
+
+//todoToggleの型
+export type todoToggleType={
+    value:string;
+    content:string;
+}

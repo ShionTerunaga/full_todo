@@ -10,7 +10,7 @@ interface props{
 const TodoItem = ({todo}:props) => {
     return (
         <div className={styles.itemBox}>
-            <div>
+            <div className={styles.textbox}>
                 {todo.todo}
             </div>
             <div className={styles.editButtons}>
