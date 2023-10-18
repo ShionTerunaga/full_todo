@@ -51,7 +51,7 @@ export default {
         },
         buttonTitle:"ログイン！！！",
         gobackBotton:"ホームに戻る",
-        notingAcount:"ユーザ登録されていません",
+        notingAcount:"ユーザ登録されていません。",
         differentPassword:"パスワードが違います。",
         alertMessage:"ユーザ登録がされていない、もしくはパスワードが違います。もう一度確認して見てください。"
     },
