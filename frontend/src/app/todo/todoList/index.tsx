@@ -60,6 +60,12 @@ const TodoList = ({
                             <div key={item.id}>
                                 <TodoItem 
                                     todo={item}
+                                    setTodo={setImcompleteData}
+                                    userid={id}
+                                    isComplete={false}
+                                    setIsComplete={setCompleteData}
+                                    setIsImcomplete={setImcompleteData}
+                                    isChecked={false}
                                 />
                             </div>
                         ))}
@@ -76,6 +82,12 @@ const TodoList = ({
                             <div key={item.id}>
                                 <TodoItem 
                                     todo={item}
+                                    userid={id}
+                                    setTodo={setCompleteData}
+                                    isComplete={true}
+                                    setIsComplete={setCompleteData}
+                                    setIsImcomplete={setImcompleteData}
+                                    isChecked={true}
                                 />
                             </div>
                         ))}

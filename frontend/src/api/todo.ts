@@ -19,3 +19,15 @@ export const getTodo=async(id:string)=>{
     const resData=await res.json();
     return resData.data as todoType[];
 }
+//todo編集
+export const changeTodo=async(userid:string,data:todoType)=>{
+    const res=await fetch(`${linkName.putTodo}${userid}`,{
+        method:"PUT",
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify(data)
+    });
+    const resData=await res.json();
+    return resData.data as todoType[];
+}

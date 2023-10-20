@@ -16,7 +16,7 @@ const styles={
         overflowY:"auto",
     }),
     completeBox:style({
-        backgroundColor:"",
+        backgroundColor:"#C0C0C0",
         maxHeight:"500px",
         overflowY:"auto",
     })

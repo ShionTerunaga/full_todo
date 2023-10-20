@@ -6,5 +6,6 @@ export default{
     loginApi:"http://localhost:8080/auth/login",
     home:"/",
     postTodo:"http://localhost:8080/todo/postTodo/",
-    getTodo:"http://localhost:8080/todo/getList/"
+    getTodo:"http://localhost:8080/todo/getList/",
+    putTodo:"http://localhost:8080/todo/updateTodo/"
 }
