@@ -17,7 +17,7 @@ const Todo = () => {
     const [todo,setTodo]=useState<todoType[]>([]);
     const [imcompleteData,setImcompleteData]=useState<todoType[]>([]);
     const [completeData,setCompleteData]=useState<todoType[]>([]);
-    const [toggleItem,setToggleItem]=useState<string>(isCmptoggleItems[0].value);
+    const [toggleItem,setToggleItem]=useState<string>(isCmptoggleItems[0].value);//hoge
     return (
         <main className={styles.containar}>
             {id&&name?(
