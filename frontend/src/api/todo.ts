@@ -31,3 +31,11 @@ export const changeTodo=async(userid:string,data:todoType)=>{
     const resData=await res.json();
     return resData.data as todoType[];
 }
+//todo削除
+export const deleteTodo=async(userid:string,itemid:string)=>{
+    const res=await fetch(`${linkName.deleteTodo}${userid}/${itemid}`,{
+        method:"DELETE",
+    });
+    const resData=await res.json();
+    return resData.data as todoType[];
+}

@@ -7,5 +7,6 @@ export default{
     home:"/",
     postTodo:"http://localhost:8080/todo/postTodo/",
     getTodo:"http://localhost:8080/todo/getList/",
-    putTodo:"http://localhost:8080/todo/updateTodo/"
+    putTodo:"http://localhost:8080/todo/updateTodo/",
+    deleteTodo:"http://localhost:8080/todo/deleteTodo/",
 }

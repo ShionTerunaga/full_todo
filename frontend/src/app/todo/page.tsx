@@ -10,6 +10,7 @@ import { SetStateAction, useState } from "react";
 import { todoToggleType, todoType } from "@/shared/type";
 import { isCmptoggleItems } from "@/shared/data";
 import IsCompleteToggle from "./isCompleteToggle";
+import SignOutButton from "./signoutButton";
 const Todo = () => {
     const searchParams:ReadonlyURLSearchParams=useSearchParams();
     const name:string|null=searchParams.get('name');
@@ -46,6 +47,7 @@ const Todo = () => {
                         setImcompleteData={setImcompleteData}
                         toggle={toggleItem}
                     />
+                    <SignOutButton/>
                 </>
             ):(
                 <NotLogin/>

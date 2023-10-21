@@ -66,7 +66,7 @@ exports.auth.post('/login', (req, res) => __awaiter(void 0, void 0, void 0, func
                 });
             }
             else {
-                const isMatch = bcrypt_1.default.compare(password, rows[0].password);
+                const isMatch = yield bcrypt_1.default.compare(password, rows[0].password);
                 if (!isMatch) {
                     return res.json({
                         data: "パスワードが違います。"

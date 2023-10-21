@@ -49,8 +49,7 @@ auth.post('/login',async(req:Request,res:Response)=>{
                     data:"ユーザ登録されていません。"
                 })
             }else{
-                const isMatch=bcrypt.compare(password,rows[0].password)
-                
+                const isMatch=await bcrypt.compare(password,rows[0].password)
                 if(!isMatch){
                     return res.json({
                         data:"パスワードが違います。"

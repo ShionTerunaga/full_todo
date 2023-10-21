@@ -57,7 +57,11 @@ const TodoItem = ({
                     isChecked={isChecked}
                 />
                 <DeleteButton
-
+                    isEdit={isEdit}
+                    userid={userid}
+                    itemid={todo.id}
+                    setIsComplete={setIsComplete} 
+                    setIsImcomplete={setIsImcomplete}
                 />
             </div>
         </div>

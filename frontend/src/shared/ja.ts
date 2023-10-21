@@ -70,6 +70,7 @@ export default {
         complete:"完了タスク",
         imcomplete:"未完了タスク",
         notItem:"アイテムはありません",
-        numOfPieces:"個"
+        numOfPieces:"個",
+        signout:"サインアウト"
     }
 }
