@@ -4,6 +4,8 @@ import { IconButton } from '@mui/material';
 import { Dispatch, SetStateAction } from 'react';
 import { todoType } from '@/shared/type';
 import { changeTodo } from '@/api/todo';
+import { mutate, useSWRConfig } from 'swr';
+import linkName from '@/shared/linkName';
 interface props{
     isEdit:boolean;
     setIsEdit:Dispatch<SetStateAction<boolean>>;
@@ -18,6 +20,7 @@ const EditButton = ({
     value,
     todo,
 }:props) => {
+    useSWRConfig();
     const doneHandleClick=async()=>{
         const newData:todoType={
             id:todo.id,
@@ -26,6 +29,7 @@ const EditButton = ({
         }
         await changeTodo(userid as string,newData);
         setIsEdit(false);
+        mutate(`${linkName.getTodo}${userid}`);
     }
     const editHandleClick=()=>{
         setIsEdit(true);

@@ -14,10 +14,9 @@ const TodoList = ({
     toggle
 }:props) => {
     const URL:string=`${linkName.getTodo}${id as string}`;
-    const {data,isLoading,error}=useSWR(
+    const {data,isLoading}=useSWR(
         URL,
         getTodo,
-        {refreshInterval: 1000}
     );
     if (isLoading)return (
         <div>

@@ -35,7 +35,7 @@ const DrawingTodo = ({data,isComplete,id}:props) => {
                             todo={item}
                             userid={id}
                             isComplete={isComplete}
-                            isChecked={false}
+                            isChecked={isComplete}
                         />
                     </div>
                 ))}

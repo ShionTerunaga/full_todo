@@ -7,12 +7,15 @@ import InputForm from "../inputForm";
 import PostButton from "../postButton";
 import { v4 } from "uuid";
 import { postTodo } from "@/api/todo";
+import useSWR,{ mutate, useSWRConfig } from "swr";
+import linkName from "@/shared/linkName";
 interface props{
     id:string;
 }
 const TodoInputForm = ({
     id,
 }:props) => {
+    useSWRConfig();
     const [todo,setTodo]=useState<string>("");
     const onClick=async()=>{
         const uuid:string=v4();
@@ -22,6 +25,7 @@ const TodoInputForm = ({
             checked:0,
         }
         const data:todoType[]=await postTodo(setData,id);
+        mutate(`${linkName.getTodo}${id}`);
         setTodo("");
     };
     return (
