@@ -5,16 +5,12 @@ import { Dispatch, SetStateAction } from "react";
 interface props{
     isEdit:boolean;
     todo:todoType;
-    setIsComplete:Dispatch<SetStateAction<todoType[]>>;
-    setIsImcomplete:Dispatch<SetStateAction<todoType[]>>;
     userid:string|null;
     isChecked:boolean;
 }
 const CheckButton = ({
     isEdit,
     todo,
-    setIsComplete,
-    setIsImcomplete,
     userid,
     isChecked
 }:props) => {
@@ -26,8 +22,6 @@ const CheckButton = ({
             checked:newIsChecked
         };
         const data:todoType[]=await changeTodo(userid as string,newTodo);
-        setIsComplete(data.filter(item=>item.checked===1));
-        setIsImcomplete(data.filter(item=>item.checked===0));
     }
     return (
         <div>

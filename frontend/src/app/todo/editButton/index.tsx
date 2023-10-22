@@ -8,8 +8,6 @@ interface props{
     isEdit:boolean;
     setIsEdit:Dispatch<SetStateAction<boolean>>;
     userid:string|null;
-    setTodo:Dispatch<SetStateAction<todoType[]>>;
-    isComplete:boolean;
     value:string;
     todo:todoType
 }
@@ -17,8 +15,6 @@ const EditButton = ({
     isEdit,
     setIsEdit,
     userid,
-    setTodo,
-    isComplete,
     value,
     todo,
 }:props) => {
@@ -28,12 +24,7 @@ const EditButton = ({
             todo:value,
             checked:todo.checked,
         }
-        const data:todoType[]=await changeTodo(userid as string,newData);
-        if(isComplete){
-            setTodo(data.filter(item=>item.checked===1));
-        }else{
-            setTodo(data.filter(item=>item.checked===0));
-        }
+        await changeTodo(userid as string,newData);
         setIsEdit(false);
     }
     const editHandleClick=()=>{

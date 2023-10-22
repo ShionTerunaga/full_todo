@@ -14,8 +14,8 @@ export const postTodo=async(data:todoType,id:string)=>{
     return resData.data as todoType[];
 }
 //todo取得
-export const getTodo=async(id:string)=>{
-    const res=await fetch(`${linkName.getTodo}${id}`);
+export const getTodo=async(URL:string)=>{
+    const res=await fetch(URL);
     const resData=await res.json();
     return resData.data as todoType[];
 }

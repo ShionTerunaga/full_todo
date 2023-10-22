@@ -1,98 +1,43 @@
 'use client'
 import { getTodo } from "@/api/todo";
 import ja from "@/shared/ja";
-import { todoToggleType, todoType } from "@/shared/type";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import Imcomplete from "../isComplete";
-import styles from "./style.css";
-import TodoItem from "../todoItem";
 import { isCmptoggleItems } from "@/shared/data";
-import IsComplete from "../isComplete";
+import useSWR from "swr";
+import linkName from "@/shared/linkName";
+import DrawingTodo from "../drawingTodo";
 interface props{
     id:string|null;
-    todos:todoType[];
-    setTodo:Dispatch<SetStateAction<todoType[]>>;
-    imcompleteData:todoType[];
-    setImcompleteData:Dispatch<SetStateAction<todoType[]>>;
-    completeData:todoType[];
-    setCompleteData:Dispatch<SetStateAction<todoType[]>>;
     toggle:string;
 }
 const TodoList = ({
     id,
-    todos,
-    setTodo,
-    completeData,
-    imcompleteData,
-    setCompleteData,
-    setImcompleteData,
     toggle
 }:props) => {
-    const [loadingMsg,setLodingMsg]=useState<string>(ja.todo.logingMsg);
-    const firstFunction=async(userId:string)=>{
-        const data:todoType[]=await getTodo(userId);
-        setTodo(data);
-        setImcompleteData(data.filter((item:todoType)=>item.checked===0));
-        setCompleteData(data.filter((item:todoType)=>item.checked===1));
-    }
-    useEffect(()=>{
-        if(id){
-            firstFunction(id);
-            setLodingMsg("");
-        }else{
-            setLodingMsg(ja.todo.logingMsg)
-        }
-    },[id])
+    const URL:string=`${linkName.getTodo}${id as string}`;
+    const {data,isLoading,error}=useSWR(
+        URL,
+        getTodo,
+        {refreshInterval: 1000}
+    );
+    if (isLoading)return (
+        <div>
+            <p>{ja.todo.logingMsg}</p>
+        </div>
+    );
     return (
         <>
-            {loadingMsg?(
-                <div>
-                    <p>{loadingMsg}</p>
-                </div>
-            ):toggle===isCmptoggleItems[0].value?(
-                <div className={styles.containar}>
-                    <IsComplete
-                        title={ja.todo.imcomplete}
-                        isComplete={false}
-                        numOfimCmp={imcompleteData.length}
-                    >
-                        {imcompleteData.map((item:todoType)=>(
-                            <div key={item.id}>
-                                <TodoItem 
-                                    todo={item}
-                                    setTodo={setImcompleteData}
-                                    userid={id}
-                                    isComplete={false}
-                                    setIsComplete={setCompleteData}
-                                    setIsImcomplete={setImcompleteData}
-                                    isChecked={false}
-                                />
-                            </div>
-                        ))}
-                    </IsComplete>
-                </div>
+            {toggle===isCmptoggleItems[0].value?(
+                <DrawingTodo
+                    data={data}
+                    isComplete={false}
+                    id={id}
+                />
             ):(
-                <div className={styles.containar}>
-                    <IsComplete
-                        title={ja.todo.complete}
-                        isComplete={true}
-                        numOfimCmp={completeData.length}
-                    >
-                        {completeData.map((item:todoType)=>(
-                            <div key={item.id}>
-                                <TodoItem 
-                                    todo={item}
-                                    userid={id}
-                                    setTodo={setCompleteData}
-                                    isComplete={true}
-                                    setIsComplete={setCompleteData}
-                                    setIsImcomplete={setImcompleteData}
-                                    isChecked={true}
-                                />
-                            </div>
-                        ))}
-                    </IsComplete>
-                </div>
+                <DrawingTodo
+                    data={data}
+                    isComplete={true}
+                    id={id}
+                />
             )}
         </>
     );

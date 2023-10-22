@@ -9,15 +9,9 @@ import { v4 } from "uuid";
 import { postTodo } from "@/api/todo";
 interface props{
     id:string;
-    setTodos:Dispatch<SetStateAction<todoType[]>>;
-    setImcompleteData:Dispatch<SetStateAction<todoType[]>>;
-    setCompleteData:Dispatch<SetStateAction<todoType[]>>;
 }
 const TodoInputForm = ({
     id,
-    setTodos,
-    setCompleteData,
-    setImcompleteData,
 }:props) => {
     const [todo,setTodo]=useState<string>("");
     const onClick=async()=>{
@@ -28,10 +22,7 @@ const TodoInputForm = ({
             checked:0,
         }
         const data:todoType[]=await postTodo(setData,id);
-        setTodos(data);
         setTodo("");
-        setImcompleteData(data.filter((item:todoType)=>item.checked===0));
-        setCompleteData(data.filter((item:todoType)=>item.checked===1));
     };
     return (
         <div>
