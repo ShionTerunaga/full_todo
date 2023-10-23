@@ -6,7 +6,8 @@ const styles={
         backgroundColor:"white",
         display:"flex",
         alignItems:"center",
-        margin:"5px"
+        margin:"5px",
+        paddingInline: "10px"
     }),
     textbox:style({
         width:"50%",
