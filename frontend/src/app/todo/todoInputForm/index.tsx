@@ -18,6 +18,7 @@ const TodoInputForm = ({
     useSWRConfig();
     const [todo,setTodo]=useState<string>("");
     const onClick=async()=>{
+        if (/^[\x20\u3000]+$/.test(todo)) return
         const uuid:string=v4();
         const setData:todoType={
             id:uuid,
