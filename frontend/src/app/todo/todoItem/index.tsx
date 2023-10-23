@@ -3,7 +3,7 @@ import styles from "./style.css";
 import EditButton from "../editButton";
 import CheckButton from "../checkButton";
 import DeleteButton from "../deleteButton";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import EditTextField from "../editTextField";
 
 interface props{
