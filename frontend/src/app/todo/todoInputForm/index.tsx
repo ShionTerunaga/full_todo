@@ -18,7 +18,6 @@ const TodoInputForm = ({
     useSWRConfig();
     const [todo,setTodo]=useState<string>("");
     const onClick=async()=>{
-        if (/^[\x20\u3000]+$/.test(todo)) return
         const uuid:string=v4();
         const setData:todoType={
             id:uuid,
@@ -42,7 +41,7 @@ const TodoInputForm = ({
                 <PostButton
                     clickEvent={onClick}
                     buttonTitle={ja.todo.buttonTitle}
-                    isDisabled={todo?false:true}
+                    isDisabled={!todo || /^[\x20\u3000]+$/.test(todo)}
                 />
             </div>
         </div>
