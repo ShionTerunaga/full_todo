@@ -41,7 +41,7 @@ const TodoInputForm = ({
                 <PostButton
                     clickEvent={onClick}
                     buttonTitle={ja.todo.buttonTitle}
-                    isDisabled={todo?false:true}
+                    isDisabled={!todo || /^[\x20\u3000]+$/.test(todo)}
                 />
             </div>
         </div>
