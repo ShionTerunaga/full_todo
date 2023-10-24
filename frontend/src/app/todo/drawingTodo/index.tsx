@@ -26,7 +26,7 @@ const DrawingTodo = ({data,isComplete,id}:props) => {
             {data?(
                 <IsComplete
                 title={ja.todo.imcomplete}
-                isComplete={false}
+                isComplete={isComplete}
                 numOfimCmp={selectData.length}
             >
                 {selectData.map((item:todoType)=>(
