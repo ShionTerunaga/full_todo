@@ -66,7 +66,7 @@ exports.todo.put('/updateTodo/:table', (req, res) => {
 exports.todo.delete('/deleteTodo/:table/:id', (req, res) => {
     const { table, id } = req.params;
     db_1.db.serialize(() => {
-        db_1.db.run(`DELETE FROM ${table} WHERE id=$id`, [id]);
+        db_1.db.run(`DELETE FROM ${table} WHERE id=$1`, [id]);
         db_1.db.all(`SELECT * FROM ${table}`, (err, rows) => {
             if (err) {
                 return res.json({
