@@ -44,7 +44,7 @@ todo.put('/updateTodo/:table',(req:Request,res:Response)=>{
     const {table}=req.params;
     const {id,todo,checked}=req.body;
     db.serialize(()=>{
-        db.run(`UPDATE ${table} SET todo=$1, checked=$2 WHERE id=$id`,[todo,checked,id]);
+        db.run(`UPDATE ${table} SET todo=$1, checked=$2 WHERE id=$3`,[todo,checked,id]);
         db.all(`SELECT * FROM ${table}`,(err:Error|null,rows:todoData[])=>{
             if(err){
                 return res.json({

@@ -47,7 +47,7 @@ exports.todo.put('/updateTodo/:table', (req, res) => {
     const { table } = req.params;
     const { id, todo, checked } = req.body;
     db_1.db.serialize(() => {
-        db_1.db.run(`UPDATE ${table} SET todo=$1, checked=$2 WHERE id=$id`, [todo, checked, id]);
+        db_1.db.run(`UPDATE ${table} SET todo=$1, checked=$2 WHERE id=$3`, [todo, checked, id]);
         db_1.db.all(`SELECT * FROM ${table}`, (err, rows) => {
             if (err) {
                 return res.json({
